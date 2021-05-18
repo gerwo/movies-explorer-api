@@ -1,0 +1,30 @@
+const jwt = require('jsonwebtoken');
+
+const { NODE_ENV, JWT_SECRET } = require('../config.js');
+
+const UnauthorizedError = require('../errors/unauthorized-err');
+
+const auth = (req, res, next) => {
+  const token = req.cookies.jwt;
+
+  if (!token) {
+    throw new UnauthorizedError('Токен не передан');
+  }
+
+  let payload;
+
+  try {
+    payload = jwt.verify(
+      token,
+      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+    );
+  } catch (error) {
+    throw new UnauthorizedError('Передан некорректный токен');
+  }
+
+  req.user = payload;
+
+  next();
+};
+
+module.exports = auth;
