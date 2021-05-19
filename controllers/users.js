@@ -88,11 +88,11 @@ const getCurrentUser = (req, res, next) => {
 
 const updateUserProfile = (req, res, next) => {
   const userId = req.user._id;
-  const { name, about } = { ...req.body };
+  const { name, email } = { ...req.body };
 
   User.findByIdAndUpdate(
     userId,
-    { name, about },
+    { name, email },
     {
       new: true,
       runValidators: true,

@@ -14,12 +14,14 @@ const {
 router.post('/signin', loginValidation, login);
 router.post('/signup', createUserValidation, createUser);
 
-router.use('/users', auth, users);
-router.use('/movies', auth, movies);
+router.use(auth);
 
-router.delete('/signout', signout);
+router.use('/users', users);
+router.use('/movies', movies);
 
-router.use('*', () => {
+router.delete('/signout',  signout);
+
+router.use('/', () => {
   throw new NotFoundError('Запрашиваемый ресурс не найден');
 });
 

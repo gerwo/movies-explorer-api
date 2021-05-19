@@ -7,7 +7,7 @@ const ForbiddenError = require('../errors/forbidden-err');
 const getMuvies = (req, res, next) => {
   Movie.find({})
     .then((movies) => {
-      if (!movies) {
+      if (movies.length === 0) {
         throw new NotFoundError('Еще не сохранено ни одного фильма');
       }
       res.send(movies);
@@ -47,10 +47,6 @@ const createMovie = (req, res, next) => {
     nameEN,
   })
     .then((movie) => {
-      if (!movie) {
-        throw new BadRequestError('Переданы некорректные данные');
-      }
-
       res.send(movie);
     })
     .catch((err) => {
@@ -73,7 +69,8 @@ const deleteMovie = (req, res, next) => {
       Movie.deleteOne({ _id: id })
         .then((deletedCard) => {
           res.send(deletedCard);
-        });
+        })
+        .catch(next);
     })
     .catch(next);
 };

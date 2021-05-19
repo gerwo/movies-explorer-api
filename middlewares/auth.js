@@ -16,7 +16,7 @@ const auth = (req, res, next) => {
   try {
     payload = jwt.verify(
       token,
-      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+      NODE_ENV === 'production' ? JWT_SECRET : 'secret-key',
     );
   } catch (error) {
     throw new UnauthorizedError('Передан некорректный токен');
