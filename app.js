@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const helmet = require('helmet');
 
 const cookieParser = require('cookie-parser');
@@ -25,20 +24,12 @@ mongoose.connect(BASE_URL, {
   useFindAndModify: false,
 });
 
-const corsConfig = {
-  origin: true,
-  credentials: true,
-};
-
 app.use(requestLogger);
 app.use(limiter);
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
-
-app.use(cors(corsConfig));
-app.options('*', cors(corsConfig));
 
 app.use(routes);
 
