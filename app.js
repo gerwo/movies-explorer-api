@@ -25,8 +25,19 @@ mongoose.connect(BASE_URL, {
   useFindAndModify: false,
 });
 
+const corsList = [
+  'https://movie-app.nomoredomains.monster',
+  'http://movie-app.nomoredomains.monster',
+  'https://localhost:3000',
+  'http://localhost:3000',
+];
+
 const corsConfig = {
-  origin: true,
+  origin: (origin, callback) => {
+    if (corsWhiteList.indexOf(origin) !== -1) {
+      callback(null, true);
+    }
+  },
   credentials: true,
 };
 
@@ -38,7 +49,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 
 app.use(cors(corsConfig));
-app.options('*', cors(corsConfig));
 
 app.use(routes);
 
