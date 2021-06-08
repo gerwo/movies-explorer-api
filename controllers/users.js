@@ -28,8 +28,9 @@ const login = (req, res, next) => {
 
       return res.cookie('jwt', token, {
         httpOnly: true,
-        sameSite: true,
-        maxAge: (360000 * 24 * 7),
+        secure: true,
+        sameSite: 'none',
+        expiresIn: (3600 * 24 * 7),
       })
         .send({ message: 'Вы авторизовались!' });
     })
