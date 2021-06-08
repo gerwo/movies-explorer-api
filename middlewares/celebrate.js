@@ -89,7 +89,7 @@ const createMovieValidation = celebrate({
       .messages({
         'string.base': 'Поле "country" должно быть строкой',
         'string.empty': 'Поле "country" не должно быть пустым',
-        'any.required': 'Поле "director" должно быть заполнено',
+        'any.required': 'Поле "country" должно быть заполнено',
       }),
     director: Joi
       .string()
@@ -97,6 +97,7 @@ const createMovieValidation = celebrate({
       .messages({
         'string.base': 'Поле "director" должно быть строкой',
         'string.empty': 'Поле "director" не должно быть пустым',
+        'any.required': 'Поле "director" должно быть заполнено',
       }),
     duration: Joi
       .number()
