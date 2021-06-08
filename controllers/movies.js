@@ -29,6 +29,8 @@ const createMovie = (req, res, next) => {
     nameEN,
   } = req.body;
 
+  res.send(req.body);
+
   const owner = req.user._id;
 
   Movie.create({
