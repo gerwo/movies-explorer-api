@@ -97,7 +97,6 @@ const createMovieValidation = celebrate({
       .messages({
         'string.base': 'Поле "director" должно быть строкой',
         'string.empty': 'Поле "director" не должно быть пустым',
-        'any.required': 'Поле "director" должно быть заполнено',
       }),
     duration: Joi
       .number()
