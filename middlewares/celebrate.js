@@ -182,13 +182,17 @@ const createMovieValidation = celebrate({
 
 const deleteMovieValidation = celebrate({
   params: Joi.object().keys({
-    movieId: Joi
-      .number()
+    _id: Joi
+      .string()
+      .hex()
+      .length(24)
       .required()
       .messages({
-        'number.base': 'Поле "movieId" должно быть числом',
-        'number.empty': 'Поле "movieId" не должно быть пустым',
-        'any.required': 'Поле "movieId" должно быть заполнено',
+        'string.base': 'Поле "_id" должно быть строкой',
+        'string.empty': 'Поле "_id" не должно быть пустым',
+        'string.hex': 'Поле "_id" должно быть шестнадцатеричным числом',
+        'string.length': 'Поле "_id" должно иметь длину в 24 символа',
+        'any.required': 'Поле "_id" должно быть заполнено',
       }),
   }),
 });
