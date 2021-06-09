@@ -32,7 +32,7 @@ const login = (req, res, next) => {
         sameSite: 'none',
         expiresIn: (3600 * 24 * 7),
       })
-        .send({ message: 'Вы авторизовались!' });
+        .send({ email: user.email, name: user.name });
     })
     .catch(next);
 };
