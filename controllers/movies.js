@@ -66,8 +66,8 @@ const deleteMovie = (req, res, next) => {
       }
 
       Movie.deleteOne({ _id: id })
-        .then((deletedCard) => {
-          res.send(deletedCard);
+        .then(() => {
+          res.send(movie);
         })
         .catch(next);
     })
